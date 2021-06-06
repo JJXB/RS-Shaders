@@ -304,7 +304,7 @@ float4 viewSpace(float2 txCoords)
 			float4 vsFetch = tex2Dlod(SamplerViewSpace,float4(fetchCoords,0,pSSDOSourceLOD));
 			
 			float3 albedoFetch = tex2Dlod(SamplerColorLOD,float4(fetchCoords,0,pSSDOBounceLOD)).xyz;
-			albedoFetch = pow(albedoFetch,pSSDOBounceSaturation);
+			albedoFetch = pow(abs(albedoFetch) + .001, pSSDOBounceSaturation);
 			albedoFetch = normalize(albedoFetch);
 			albedoFetch *= pSSDOBounceMultiplier;
 			albedoFetch = 1.0-albedoFetch;
